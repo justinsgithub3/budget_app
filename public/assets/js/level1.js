@@ -5,10 +5,6 @@ const incomeInput = document.querySelector("#income-1")
 const expenseInput = document.querySelector("#expense-1");
 const profitInput = document.querySelector("#profit-1");
 
-
-
-
-
 // add event listener to calculate
 calculateButton.addEventListener('click', async () => {
     // calculate function
