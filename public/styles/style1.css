@@ -4,13 +4,26 @@
 }
 
 body {
-    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .calculator-div {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
     margin: 10px;
+    width: 30%;
+    gap: 5px;
+
 }
 
 .calculator-div > * {
     color: green;
+}
+
+button {
+    background-color: lightgreen;
+    border-width: .5px;
 }
