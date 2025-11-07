@@ -17,12 +17,106 @@ const incomeBtn = document.querySelector("#income-btn");
 
 // add event listener to calculate
 calculateButton.addEventListener('click', async () => {
+
+    const profitLabel = document.querySelector("#profit-label");
+    // change profit label back to 'gains' and font color to black
+    profitLabel.textContent = 'Gains';
+    profitInput.style.color = 'black';
+
+
     // calculate function
     calculateProfit();
 })
 
 // add event listener to clear
 clearButton.addEventListener('click', async () => {
+    clearForm();
+})
+
+// add event listener to add a blank incomes field
+incomeBtn.addEventListener('click', async () => {
+    // create income input element
+    const newIncomeEle = document.createElement("input");
+    newIncomeEle.setAttribute("class", "income-input");
+    newIncomeEle.setAttribute("min", "0");
+    //newIncomeEle.setAttribute("type", "number");
+
+    // get list of children
+    let list = incomesDiv.children;
+    // append as second to last child in container
+    incomesDiv.insertBefore(newIncomeEle, list[list.length-1]);
+});
+
+// add event listener to add a blank expenses field
+expenseBtn.addEventListener('click', async () => {
+    // create expense input element
+    const newExpenseEle = document.createElement("input");
+    newExpenseEle.setAttribute("class", "expense-input");
+    newExpenseEle.setAttribute("min", "0");
+    //newExpenseEle.setAttribute("type", "number");
+
+    // get list of children
+    let list = expensesDiv.children;
+    // append as second to last child in container
+    expensesDiv.insertBefore(newExpenseEle, list[list.length-1]);
+});
+
+
+async function calculateProfit() {
+    // get all income & expense inputs
+    const allIncomeInputs = document.querySelectorAll(".income-input");
+    const allExpenseInputs = document.querySelectorAll(".expense-input");
+    const profitLabel = document.querySelector("#profit-label");
+
+
+    // calculate income
+    let income = 0; // accumulator
+    allIncomeInputs.forEach((e) => {
+
+        let value = e.value.replace(/[^0-9.]/g, '');
+        value = parseInt(value);
+
+        if (isNaN(value)) {
+            value = 0; // if not a number, treat as 0
+        } 
+
+        income += value;
+    });
+
+    // calculate expenses
+    let expenses = 0;
+    allExpenseInputs.forEach((e) => {
+        
+        let value = e.value.replace(/[^0-9.]/g, '');
+        value = parseInt(value);
+        
+        if (isNaN(value)) {
+            value = 0; // if not a number, treat as 0
+        } 
+
+        expenses += value;
+    });
+
+    // calculate difference
+    const profit = income - expenses;
+
+    // if value is less than 0, change font color to red
+    // change 'gains' to 'losses'
+    if (profit < 0) {
+        profitInput.style.color = 'red';
+        profitLabel.textContent = 'Losses';
+    };
+
+
+
+    // display profit
+    profitInput.value = profit;
+
+}
+
+
+// resets form to default
+function clearForm() {
     // get all income & expense inputs
     const allIncomeInputs = document.querySelectorAll(".income-input");
     const allExpenseInputs = document.querySelectorAll(".expense-input");
@@ -47,90 +141,4 @@ clearButton.addEventListener('click', async () => {
     // change profit label back to 'gains' and font color to black
     profitLabel.textContent = 'Gains';
     profitInput.style.color = 'black';
-
-
-
-
-
-})
-
-// add event listener to add a blank incomes field
-incomeBtn.addEventListener('click', async () => {
-    // create income input element
-    const newIncomeEle = document.createElement("input");
-    newIncomeEle.setAttribute("class", "income-input");
-    newIncomeEle.setAttribute("min", "0");
-    newIncomeEle.setAttribute("type", "number");
-
-    // get list of children
-    let list = incomesDiv.children;
-    // append as second to last child in container
-    incomesDiv.insertBefore(newIncomeEle, list[list.length-1]);
-});
-
-// add event listener to add a blank expenses field
-expenseBtn.addEventListener('click', async () => {
-    // create expense input element
-    const newExpenseEle = document.createElement("input");
-    newExpenseEle.setAttribute("class", "expense-input");
-    newExpenseEle.setAttribute("min", "0");
-    newExpenseEle.setAttribute("type", "number");
-
-    // get list of children
-    let list = expensesDiv.children;
-    // append as second to last child in container
-    expensesDiv.insertBefore(newExpenseEle, list[list.length-1]);
-});
-
-
-async function calculateProfit() {
-    // get all income & expense inputs
-    const allIncomeInputs = document.querySelectorAll(".income-input");
-    const allExpenseInputs = document.querySelectorAll(".expense-input");
-    const profitLabel = document.querySelector("#profit-label");
-
-
-    // calculate income
-    let income = 0; // accumulator
-    allIncomeInputs.forEach((e) => {
-
-        let value = parseInt(e.value);
-        
-        if (isNaN(value)) {
-            value = 0; // if not a number, treat as 0
-        } 
-
-        income += value;
-    });
-
-    // calculate expenses
-    let expenses = 0;
-    allExpenseInputs.forEach((e) => {
-        
-        let value = parseInt(e.value);
-        
-        if (isNaN(value)) {
-            value = 0; // if not a number, treat as 0
-        } 
-
-        expenses += value;
-    });
-
-    // calculate difference
-    const profit = income - expenses;
-    console.log(income, expenses, profit)
-    
-
-    // if value is less than 0, change font color to red
-    // change 'gains' to 'losses'
-    if (profit < 0) {
-        profitInput.style.color = 'red';
-        profitLabel.textContent = 'Losses';
-    };
-
-
-
-    // display profit
-    profitInput.value = profit;
-
 }
