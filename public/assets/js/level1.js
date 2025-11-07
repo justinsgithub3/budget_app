@@ -27,6 +27,9 @@ clearButton.addEventListener('click', async () => {
     const allIncomeInputs = document.querySelectorAll(".income-input");
     const allExpenseInputs = document.querySelectorAll(".expense-input");
 
+    const profitLabel = document.querySelector("#profit-label");
+
+
     // clear the input value
     allIncomeInputs.forEach((e) => {
         e.value = "";
@@ -40,6 +43,15 @@ clearButton.addEventListener('click', async () => {
 
     // clear profit input
     profitInput.value = "";
+
+    // change profit label back to 'gains' and font color to black
+    profitLabel.textContent = 'Gains';
+    profitInput.style.color = 'black';
+
+
+
+
+
 })
 
 // add event listener to add a blank incomes field
@@ -50,8 +62,10 @@ incomeBtn.addEventListener('click', async () => {
     newIncomeEle.setAttribute("min", "0");
     newIncomeEle.setAttribute("type", "number");
 
-    // append to container
-    incomesDiv.appendChild(newIncomeEle);
+    // get list of children
+    let list = incomesDiv.children;
+    // append as second to last child in container
+    incomesDiv.insertBefore(newIncomeEle, list[list.length-1]);
 });
 
 // add event listener to add a blank expenses field
@@ -62,8 +76,10 @@ expenseBtn.addEventListener('click', async () => {
     newExpenseEle.setAttribute("min", "0");
     newExpenseEle.setAttribute("type", "number");
 
-    // append to container
-    expensesDiv.appendChild(newExpenseEle);
+    // get list of children
+    let list = expensesDiv.children;
+    // append as second to last child in container
+    expensesDiv.insertBefore(newExpenseEle, list[list.length-1]);
 });
 
 
@@ -71,6 +87,7 @@ async function calculateProfit() {
     // get all income & expense inputs
     const allIncomeInputs = document.querySelectorAll(".income-input");
     const allExpenseInputs = document.querySelectorAll(".expense-input");
+    const profitLabel = document.querySelector("#profit-label");
 
 
     // calculate income
@@ -98,12 +115,21 @@ async function calculateProfit() {
 
         expenses += value;
     });
-    
 
     // calculate difference
     const profit = income - expenses;
     console.log(income, expenses, profit)
     
+
+    // if value is less than 0, change font color to red
+    // change 'gains' to 'losses'
+    if (profit < 0) {
+        profitInput.style.color = 'red';
+        profitLabel.textContent = 'Losses';
+    };
+
+
+
     // display profit
     profitInput.value = profit;
 

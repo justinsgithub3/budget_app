@@ -50,6 +50,27 @@ body {
     border-width: .2rem;
 }
 
+.container-1 {
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+#incomes {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#expenses {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
 #inputs {
     display: flex;
     flex-direction: row;
