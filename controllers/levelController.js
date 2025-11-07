@@ -16,6 +16,16 @@ export const getLevel1 = async (req, res, next) => {
     }
 };
 
+export const getLevel2 = async (req, res, next) => {    
+    try {
+        res.status(200).sendFile(path.join(__dirname, '..', 'public', 'views', 'level2.html'));
+    }
+    catch (e) {
+        // server error
+        console.log("Error: ", e)
+        res.status(500).json({ error : e.message || 'Internal server error' });
+    }
+};
 
 
 /*

@@ -10,6 +10,23 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    height: 100vh;
+}
+
+.header {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    background-color: beige;
+    margin: 10px;
+    width: 90%;
+    padding: 10px;
+
+    border-style: solid;
+    border-color: #3b3b3b;
+    border-width: .2rem;
 }
 
 .calculator-div {
@@ -18,32 +35,23 @@ body {
     flex-direction: column;
     align-items: center;
 
-    margin: 10px;
     width: 90%;
-    gap: 5px;
+
 
     background-color: beige;
     padding: 10px;
 
     font-size: 1.5rem;
- 
+
+    height: 100vh;
+
+    border-style: solid;
+    border-color: #3b3b3b;
+    border-width: .2rem;
 }
 
-.calculator-div > * {
-    color: green;
-    width: 50%;
-}
-
-button {
-    background-color: lightgreen;
-    border-width: .5px;
-    height: 3rem;
-    font-size: 1.4rem;
-}
-input { 
-    background-color: white;
-    border-width: .5px;
-    height: 3rem;
-    font-size: 1.4rem;
-    text-align: center;
+#inputs {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 }

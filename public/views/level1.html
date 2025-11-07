@@ -4,19 +4,29 @@
     <link rel="stylesheet" href="/styles/style1.css"/>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Level 1</title>
+    <title>stupid simple</title>
 </head>
 <body>
-    <h1>Level 1</h1>
+    <header class="header">
+        <h1>stupid simple budget</h1>
+        <a id="home-anchor" href="/">home</a>
+    </header>
 
     <div class="calculator-div">
     
+    <div id="incomes">
         <label for="income-1">Income</label>
-        <input type="number" id="income-1" name="income-1" min="0">
+        <button id="income-btn">+</button>
+        <input type="number" class="income-input" name="income-1" min="0">
 
-        <label for="expense-1">Expenses</label>
-        <input type="number" id="expense-1" name="expense-1" min="0">
+    </div>
+    <div id="expenses">
+        <label for="expense-1">Expense</label>
+        <button id="expense-btn">+</button>
+        <input type="number" class="expense-input" name="expense-1" min="0">
         
+    </div> 
+    
         <button id="calculate">Calculate</button>
         
         <label for="profit-1">Gains</label>
