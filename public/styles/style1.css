@@ -54,7 +54,6 @@ body {
     text-align: center;
     display: flex;
     flex-direction: row;
-    align-items: center;
 }
 
 #incomes {
@@ -70,9 +69,3 @@ body {
     align-items: center;
 }
 
-
-#inputs {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-}
