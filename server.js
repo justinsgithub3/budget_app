@@ -2,11 +2,11 @@ import express from 'express';
 import path from 'path';
 import { fileURLToPath } from 'url'; 
 //import { promises as fs} from 'fs'; // allows for async file reading
-//import cookieParser from 'cookie-parser';
+import cookieParser from 'cookie-parser';
 import logger from './middleware/logger.mjs';
-//import images from './routes/images.js';
-//import displays from './routes/displays.js';
 import level from './routes/level.js';
+import authentication from './routes/authentication.js';
+import display from './routes/display.js';
 
 // Get the current filename and directory path
 const __filename = fileURLToPath(import.meta.url);
@@ -22,6 +22,9 @@ app.use(logger);
 app.use(express.json());
 app.use(express.urlencoded({ extended:false }));
 
+// cookie middleware - used in /verify route for authentication
+app.use(cookieParser("this is the secret"));
+
 const port = process.env.PORT || 8080;
 
 // parse json data
@@ -31,17 +34,14 @@ app.use(express.json());
 // app.set('view engine', 'ejs');
 
 // routes in this middlware regarding levels
-app.use('/level', level);
-
-
+//app.use('/level', level);
+app.use('/verify', authentication);
+app.use('/display', display); // reitterating levels for testing
 
 app.get(['/'], (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'views/index.html'));
 })
 
-app.get(['/first'], (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'views/level1.html'));
-});
 
 // initialize a port.
 app.listen(port, () => {

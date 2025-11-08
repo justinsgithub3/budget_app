@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/justinsgithub3/budget_app#readme",
   "dependencies": {
+    "cookie-parser": "^1.4.7",
     "express": "^5.1.0"
   }
 }

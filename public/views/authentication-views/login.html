@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p>Login page</p>
+    <a id="home-anchor" href="/">home</a>
+    <!-- enter username and password as a form to /verify/login -->
+    <div class=form>
+    <form id="create-account-form" action="/verify/login" method="POST">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" /><br>
+
+        <label for="full_name">Name:</label>
+        <input type="text" id="full_name" name="full_name" /><br>
+        
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" /><br>
+
+        <label for="password">Password:</label>
+        <input type="text" id="password" name="password" /><br>
+        
+        <label for="re_password">Retype-Password:</label>
+        <input type="text" id="re_password" name="re_password" /><br>
+
+        <button name="submit" type="submit">Create Account</button>
+    </form>
+</div>
+</body>
+</html>

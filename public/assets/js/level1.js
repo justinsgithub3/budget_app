@@ -23,7 +23,6 @@ calculateButton.addEventListener('click', async () => {
     profitLabel.textContent = 'Gains';
     profitInput.style.color = 'black';
 
-
     // calculate function
     calculateProfit();
 })
