@@ -38,6 +38,7 @@ incomeBtn.addEventListener('click', async () => {
     // create income input element
     const newIncomeEle = document.createElement("input");
     newIncomeEle.setAttribute("class", "income-input");
+    newIncomeEle.setAttribute("class", "added")
     newIncomeEle.setAttribute("min", "0");
     //newIncomeEle.setAttribute("type", "number");
 
@@ -52,6 +53,7 @@ expenseBtn.addEventListener('click', async () => {
     // create expense input element
     const newExpenseEle = document.createElement("input");
     newExpenseEle.setAttribute("class", "expense-input");
+    newExpenseEle.setAttribute("class", "added")
     newExpenseEle.setAttribute("min", "0");
     //newExpenseEle.setAttribute("type", "number");
 
@@ -107,8 +109,6 @@ async function calculateProfit() {
         profitLabel.textContent = 'Losses';
     };
 
-
-
     // display profit
     profitInput.value = profit;
 
@@ -141,4 +141,12 @@ function clearForm() {
     // change profit label back to 'gains' and font color to black
     profitLabel.textContent = 'Gains';
     profitInput.style.color = 'black';
+
+    // remove all extra inputs class:'added'
+    const addedEle = document.querySelectorAll(".added");
+
+    addedEle.forEach((element) => {
+        element.remove();
+    })
+
 }
