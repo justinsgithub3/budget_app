@@ -7,12 +7,15 @@ import logger from './middleware/logger.mjs';
 import level from './routes/level.js';
 import authentication from './routes/authentication.js';
 import display from './routes/display.js';
+import session from 'express-session';
 
 // Get the current filename and directory path
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const app = express();
+
+
 
 app.use(express.static(path.join(__dirname, 'public')))
 
@@ -23,7 +26,21 @@ app.use(express.json());
 app.use(express.urlencoded({ extended:false }));
 
 // cookie middleware - used in /verify route for authentication
-app.use(cookieParser("this is the secret"));
+app.use(cookieParser(process.env.COOKIE_KEY));
+
+// session middleware
+app.use(
+  session({
+    name: "session",    
+    secret: process.env.SESSION_KEY, // change this to something long and random
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+      httpOnly: true,
+      maxAge: 1000 * 60 * 60 // 1 hour
+    }
+  })
+);
 
 const port = process.env.PORT || 8080;
 

@@ -4,6 +4,7 @@ const calculateButton = document.querySelector("#calculate");
 const incomeInput = document.querySelector("#income-1")
 const expenseInput = document.querySelector("#expense-1");
 const profitInput = document.querySelector("#profit-1");
+const header = document.querySelector(".header");
 
 const inputsDiv = document.querySelector("#inputs");
 
@@ -31,6 +32,8 @@ calculateButton.addEventListener('click', async () => {
 clearButton.addEventListener('click', async () => {
     clearForm();
 })
+
+
 
 // add event listener to add a blank incomes field
 incomeBtn.addEventListener('click', async () => {
@@ -149,3 +152,15 @@ function clearForm() {
     })
 
 }
+
+
+document.addEventListener("DOMContentLoaded", async () => {
+
+    // create element to add current user's name
+    const nameEle = document.createElement("p");
+    //get name from session storage
+    const name = sessionStorage.getItem('name')
+    nameEle.textContent = name;
+
+    header.appendChild(nameEle);
+})

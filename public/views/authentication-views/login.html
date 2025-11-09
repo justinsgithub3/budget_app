@@ -9,25 +9,14 @@
     <p>Login page</p>
     <a id="home-anchor" href="/">home</a>
     <!-- enter username and password as a form to /verify/login -->
-    <div class=form>
-    <form id="create-account-form" action="/verify/login" method="POST">
+    <form id="login-form" action="/verify/login" method="POST">
         <label for="username">Username:</label>
-        <input type="text" id="username" name="username" /><br>
-
-        <label for="full_name">Name:</label>
-        <input type="text" id="full_name" name="full_name" /><br>
-        
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" /><br>
-
+        <input type="text" id="username" name="username" />
         <label for="password">Password:</label>
-        <input type="text" id="password" name="password" /><br>
+        <input type="text" id="password" name="password" />
         
-        <label for="re_password">Retype-Password:</label>
-        <input type="text" id="re_password" name="re_password" /><br>
-
-        <button name="submit" type="submit">Create Account</button>
+        <button name="submit" type="submit">Login</button>
     </form>
-</div>
+    <script type="module" src="/assets/js/login.js"></script>
 </body>
 </html>

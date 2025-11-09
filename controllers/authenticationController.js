@@ -1,42 +1,112 @@
 import path from 'path';
 import { fileURLToPath } from 'url'; 
+import { pool } from '../database/pool.js';
+import bcrypt from 'bcrypt';
+import { getUserData } from '../database/queries.js';
 // Get the current filename and directory path
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+// bcrypt middleware
+// sessions
+// cookies !
 
-export const createAccount = async (req, res, next) => {    
+
+export const logout = async (req, res, next) => {   
+    // clear cookie data
     try {
-        // receives a post request with username and password
-        
+        req
+            .session.destroy();
+        res
+            .clearCookie("session")
+            .redirect('/');
     }
     catch (e) {
         // server error
         console.log("Error: ", e)
-        res.status(500).json({ error : e.message || 'Internal server error' });
+        res
+            .status(500)
+            .json({ error : e.message || 'Internal server error' });
+    }
+
+};
+// if user is trying to login
+export const login = async (req, res, next) => {    
+
+    const username = req.body.username;
+    const password = req.body.password;
+    try {
+        // move to a database module
+
+        // get password for provided username
+        const [rows] = await pool.query("SELECT user_password, full_name, user_id FROM users WHERE username = ?", [username]);
+        // check if the username even exists
+        const rowCount = rows.length; 
+        if (rowCount != 1) { // if row count is not 1 ie. no user or multiple users
+            res.status(401).json({ error: "No account" });
+        }
+    
+        // get hashed password
+        const hash = rows[0].user_password;
+        const userId = rows[0].user_id;
+        const name = rows[0].full_name;
+        console.log('user id: ', rows[0].user_id)
+        // log hash
+        console.log('hash is: ', hash);
+
+        // compare hash to provided password
+        const passwordMatch = bcrypt.compareSync(password, hash); // true or false
+
+        console.log('True mean passwords match, false means not the same passwords: ', passwordMatch);
+
+        // if password is not valid
+        if (!passwordMatch) {
+            res.status(401).json({ error: "Invalid password" });
+        }
+    
+        // if password is valid
+        req.session.userId = userId;
+        res
+            .json({ "status": "success",
+                    "username": username,
+                    "name": name            });
+
+    }
+    catch (e) {
+        // re render the login page
+        res.status(500).json({"status": "no success"});
     }
 };
 
-export const login = async (req, res, next) => {   
+export const createAccount = async (req, res, next) => {   
+
+    // create something to verify these are all valid
+    const username = req.body.username;
+    const password = req.body.password;
+    const rePassword = req.body.re_password;
+    const email = req.body.email;
+    const fullName = req.body.full_name;
+
+    const saltRounds = 10;
+    const salt = bcrypt.genSaltSync(saltRounds);
+    const hash = bcrypt.hashSync(rePassword, salt);
+     
     try {
-        console.log(req);
-        const username = req.body.username;
-        const password = req.body.password;
-        const rePassword = req.body.re_password;
-        const email = req.body.email;
-        const fullName = req.body.full_name;
+        const result = await pool.query( "INSERT INTO users (username, user_password, email, full_name) VALUES (?, ?, ?, ?)", 
+                                        [username, hash, email, fullName]);
 
         // receives a post request with username and password
-        res.json({  username: username, 
-                    password: password,
-                    rePassword: rePassword,
-                    email: email,
-                    full_name: fullName
-                });
+        // if creation is valid
+        console.log('all good here?');
+        res
+            .json({ "status": "success",
+                    "username": username,
+                    "name": fullName        });
     }
     catch (e) {
         // server error
         console.log("Error: ", e)
-        res.status(500).json({ error : e.message || 'Internal server error' });
+        res.status(500).json({"status": "no success"});
     }
 }
+
