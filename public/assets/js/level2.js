@@ -1,6 +1,9 @@
 let expensesCont = document.querySelector('#expenses-container');
 let addExpenseButton = document.querySelector('#add-expense');
 
+const logoutAnch = document.querySelector("#logout-anchor");
+
+
 // returns an object of expenses
 async function expenses() {
     const res = await fetch('/exp');
@@ -352,6 +355,11 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     // add event listener to 'add new' button
     addExpenseButton.addEventListener('click', addExpenseDisplay);
+
+    // handle logout
+    logoutAnch.addEventListener("click", async (e) => {
+        sessionStorage.clear();
+    })
 
     const expensesToDisplay = await expenses();
     await displayExpenses(expensesToDisplay);
