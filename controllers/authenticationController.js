@@ -90,9 +90,19 @@ export const createAccount = async (req, res, next) => {
         const result = await pool.query( "INSERT INTO users (username, user_password, email, full_name) VALUES (?, ?, ?, ?)", 
                                         [username, hash, email, fullName]);
 
-        // receives a post request with username and password
-        // if creation is valid
-        console.log('all good here?');
+
+
+        
+        const userData = await getUserData(username);
+        // check if the username even exists
+        const rowCount = userData.length; 
+        
+        if (rowCount == 1) { // if row count is not 1 ie. no user or multiple users
+            // if an account under this username was created then create a session
+            const userId = userData[0].user_id;
+            req.session.userId = userId;
+        }
+
         res
             .json({ "status": "success",
                     "username": username,
