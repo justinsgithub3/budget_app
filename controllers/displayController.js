@@ -10,6 +10,7 @@ export const getCreatePage = async (req, res, next) => {
     if (req.session.userId) {
         return res.redirect("/");
     } 
+
     try {
         res.status(200).sendFile(path.join(__dirname, '..', 'public', 'views', 'authentication-views', 'createAcct.html'));
     }
@@ -36,6 +37,7 @@ export const getLoginPage = async (req, res, next) => {
 };
 
 export const getLevel1 = async (req, res, next) => {    
+
     try {
         res.status(200).sendFile(path.join(__dirname, '..', 'public', 'views', 'level1.html'));
     }

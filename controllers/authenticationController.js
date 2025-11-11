@@ -36,28 +36,22 @@ export const login = async (req, res, next) => {
     const username = req.body.username;
     const password = req.body.password;
     try {
-        // move to a database module
-
-        // get password for provided username
-        const [rows] = await pool.query("SELECT user_password, full_name, user_id FROM users WHERE username = ?", [username]);
+        // check password
+        const userData = await getUserData(username);
         // check if the username even exists
-        const rowCount = rows.length; 
+        const rowCount = userData.length; 
+        
         if (rowCount != 1) { // if row count is not 1 ie. no user or multiple users
             res.status(401).json({ error: "No account" });
         }
     
         // get hashed password
-        const hash = rows[0].user_password;
-        const userId = rows[0].user_id;
-        const name = rows[0].full_name;
-        console.log('user id: ', rows[0].user_id)
-        // log hash
-        console.log('hash is: ', hash);
+        const hash = userData[0].user_password;
+        const userId = userData[0].user_id;
+        const name = userData[0].full_name;
 
         // compare hash to provided password
         const passwordMatch = bcrypt.compareSync(password, hash); // true or false
-
-        console.log('True mean passwords match, false means not the same passwords: ', passwordMatch);
 
         // if password is not valid
         if (!passwordMatch) {
@@ -66,6 +60,7 @@ export const login = async (req, res, next) => {
     
         // if password is valid
         req.session.userId = userId;
+        
         res
             .json({ "status": "success",
                     "username": username,

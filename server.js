@@ -8,14 +8,13 @@ import level from './routes/level.js';
 import authentication from './routes/authentication.js';
 import display from './routes/display.js';
 import session from 'express-session';
+import expense from './routes/expense.js';
 
 // Get the current filename and directory path
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const app = express();
-
-
 
 app.use(express.static(path.join(__dirname, 'public')))
 
@@ -54,6 +53,7 @@ app.use(express.json());
 //app.use('/level', level);
 app.use('/verify', authentication);
 app.use('/display', display); // reitterating levels for testing
+app.use('/exp', expense) // anything dealing with expenses
 
 app.get(['/'], (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'views/index.html'));
