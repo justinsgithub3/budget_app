@@ -14,5 +14,36 @@ export const getExpenses = async (userId) => {
 
 export const getUID = async (username) => {
     const result = await pool.query("SELECT user_id FROM users WHERE username = ?", [username]);
+}
 
+export const putExpense = async (data) => {
+    const expenseId = data.id;
+    const newDescription = data.new_description;
+    const newAmount = data.new_amount;
+    const newDate = data.new_date;
+
+    const result = await pool.query(
+       `UPDATE expenses
+        SET description_exp = ?, amount = ?, date_exp = ?
+        WHERE expense_id = ?`,
+        [newDescription, newAmount, newDate, expenseId]);
+
+    return result;
+}
+
+export const addExpense = async (data, userId) => {
+    //const expenseId = data.new_id;
+    const newDescription = data.new_description;
+    const newAmount = data.new_amount;
+    const newDate = data.new_date;
+    console.log(newDate)
+    const result = await pool.query(
+       `INSERT INTO expenses (user_id, description_exp, amount, date_exp)
+        VALUES (?, ?, ?, ?)`,
+        [userId, newDescription, newAmount, newDate]);
+    return result;
+}
+
+export const deleteExpense = async (data, userId) => {
+    // verify with userId
 }
