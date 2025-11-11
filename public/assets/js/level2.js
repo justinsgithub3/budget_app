@@ -41,7 +41,7 @@ async function displayExpenses(expenses) {
         const deleteEl = document.createElement('button');
         deleteEl.textContent = 'x';
         deleteEl.classList.add('delete');
-        //deleteEl.addEventListener('click', deletePost); // event listener attached to every delete button
+        deleteEl.addEventListener('click', deletePost); // event listener attached to every delete button
         expenseEl.appendChild(deleteEl);
 
         // create edit button
@@ -52,6 +52,51 @@ async function displayExpenses(expenses) {
         expenseEl.appendChild(editEl);
     })
 }
+
+async function deletePost(e) {
+    console.log('deleting...')
+    const id = e.srcElement.parentNode.id;
+    console.log(id)
+
+    try {
+        const res = await fetch('/exp', {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(
+            {
+                'id': id
+            }
+            )
+        });
+        const response = await res.json();
+        const status = response.status;
+        console.log(status)
+
+        if (!res.ok) {
+            throw new Error("Failed to fetch desired post");
+        }
+    } catch (e) {
+        res.json({'error': e})
+    }
+    // redisplay everything
+    const expensesToDisplay = await expenses();
+    await displayExpenses(expensesToDisplay);
+
+
+
+
+
+
+
+
+
+
+
+
+}
+
 
 async function editPost(e) {
     e.preventDefault();

@@ -36,7 +36,6 @@ export const addExpense = async (data, userId) => {
     const newDescription = data.new_description;
     const newAmount = data.new_amount;
     const newDate = data.new_date;
-    console.log(newDate)
     const result = await pool.query(
        `INSERT INTO expenses (user_id, description_exp, amount, date_exp)
         VALUES (?, ?, ?, ?)`,
@@ -46,4 +45,11 @@ export const addExpense = async (data, userId) => {
 
 export const deleteExpense = async (data, userId) => {
     // verify with userId
+    // data will just be data.expense_id
+    const expenseId = data.id;
+    const result = await pool.query(
+        `DELETE FROM expenses
+         WHERE expense_id = ? AND user_id = ?`,
+         [expenseId, userId]);
+    return result;
 }

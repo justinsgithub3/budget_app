@@ -1,6 +1,6 @@
 import path from 'path';
 import { fileURLToPath } from 'url'; 
-import { getExpenses, putExpense, addExpense } from '../database/queries.js';
+import { getExpenses, putExpense, addExpense, deleteExpense } from '../database/queries.js';
 
 // Get the current filename and directory path
 const __filename = fileURLToPath(import.meta.url);
@@ -55,13 +55,28 @@ export const addUserExpense = async (req, res, next) => {
     if (!user) {
         return res.json({err: "user not logged in."});
     } 
-
     try {
 
         const data = req.body;
-
         const response = await addExpense(data, user);
 
+        res.json({"status" : "success"});
+
+    } catch (e) {
+        // server error
+        console.log("Error: ", e)
+        res.status(500).json({"status": "no success"});
+    }
+}
+
+export const deleteUserExpense = async (req, res, next) => {
+    const user = req.session.userId;
+    if (!user) {
+        return res.json({err: "user not logged in."});
+    } 
+    try {
+        const data = req.body;
+        const response = await deleteExpense(data, user);
         res.json({"status" : "success"});
 
     } catch (e) {
