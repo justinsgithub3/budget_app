@@ -12,6 +12,13 @@ async function expenses() {
     return expenses;
 }
 
+async function sumOfExpenses() {
+    const res = await fetch('/exp/total');
+    const data = await res.json();
+    const total = data.total;
+    return total
+}
+
 async function displayExpenses(expenses) {
     // clear any pre-existing data
     expensesCont.innerHTML = '';
@@ -84,19 +91,12 @@ async function deletePost(e) {
         res.json({'error': e})
     }
     // redisplay everything
+    // display of totals
+    const totalExp = await sumOfExpenses();
+    await updateTotal(totalExp);
+    
     const expensesToDisplay = await expenses();
     await displayExpenses(expensesToDisplay);
-
-
-
-
-
-
-
-
-
-
-
 
 }
 
@@ -244,6 +244,11 @@ async function saveEdit(e) {
         res.json({'error': e})
     }
     // redisplay everything
+
+    // display of totals
+    const totalExp = await sumOfExpenses();
+    await updateTotal(totalExp);
+
     const expensesToDisplay = await expenses();
     await displayExpenses(expensesToDisplay);
 }
@@ -335,10 +340,32 @@ async function saveNewExpense(e) {
     } catch (e) {
         console.log('error adding new expense')
     }
+
+
     // redisplay everything
+    // display of totals
+    const totalExp = await sumOfExpenses();
+    await updateTotal(totalExp);
+
     const expensesToDisplay = await expenses();
     await displayExpenses(expensesToDisplay);
 }
+
+async function updateTotal(total) {
+    const totalDiv = document.querySelector("#total-div");
+    totalDiv.innerHTML = '';
+
+    // create label
+    const label = document.createElement('span');
+    label.textContent = "total:";
+
+    const totalSpan = document.createElement('span');
+    totalSpan.textContent = total;
+
+    totalDiv.appendChild(label);
+    totalDiv.appendChild(totalSpan);
+}
+
 
 document.addEventListener("DOMContentLoaded", async () => {
     const header = document.querySelector(".header");
@@ -359,8 +386,13 @@ document.addEventListener("DOMContentLoaded", async () => {
     // handle logout
     logoutAnch.addEventListener("click", async (e) => {
         sessionStorage.clear();
-    })
+    });
 
+    // display of totals
+    const totalExp = await sumOfExpenses();
+    await updateTotal(totalExp);
+
+    // display of all other items
     const expensesToDisplay = await expenses();
     await displayExpenses(expensesToDisplay);
 })

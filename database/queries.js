@@ -53,3 +53,13 @@ export const deleteExpense = async (data, userId) => {
          [expenseId, userId]);
     return result;
 }
+
+export const getSumOfExpenses = async (userId) => {
+    // verify with userId
+    const [response] = await pool.query(
+       `SELECT SUM(amount) AS total
+        FROM expenses 
+        WHERE user_id = ?`,
+        [userId]);
+    return response[0];
+}
