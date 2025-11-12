@@ -156,11 +156,16 @@ function clearForm() {
 
 document.addEventListener("DOMContentLoaded", async () => {
 
-    // create element to add current user's name
-    const nameEle = document.createElement("p");
-    //get name from session storage
-    const name = sessionStorage.getItem('name')
-    nameEle.textContent = name;
 
-    header.appendChild(nameEle);
+    if (sessionStorage.getItem('name')) {
+        // create element to add current user's name
+        const nameEle = document.createElement("p");
+        //get name from session storage
+        const name = sessionStorage.getItem('name')
+        nameEle.textContent = name;
+        // get list of children
+        let list = header.children;
+        // append as second to last child in container
+        header.insertBefore(nameEle, list[list.length-1]);
+    }
 })

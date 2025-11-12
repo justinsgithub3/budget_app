@@ -6,14 +6,161 @@ html {
     font-size: 16px;
 }
 
-.header {
-    border-style: solid;
-    border-color: #3b3b3b;
-    border-width: .2rem;
-
+a {
+    text-decoration: none;
+    color: black;
     text-align: center;
+    white-space: nowrap;
+}
+
+
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    background-color: #fef7e6;
+    margin: 0px;
+}
+
+.header {
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
+    background-color: #fef7e6;
+    width: 100vw;
+    box-sizing: border-box;
+    padding: 4rem;
+    flex-wrap: nowrap;
+ }
+
+  h1 {
+    color: black;
+    font-size: 4rem;
+ }
+ /* if signed in then this will exist */
+ p {
+    color: black;
+    font-size: 3rem;
+    white-space: nowrap;
+ }
+
+ .anchors {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    padding: 0px;
+ }
+ .anchors > a {
+    background-color: white;
+    padding: 1rem;
+    border-radius: 4rem;
+    font-size: 1.5rem;
+    margin-left: 0.3rem;
+ }
+
+ button {
+    all: unset;
+    text-decoration: none;
+    color: black;
+    text-align: center;
+    white-space: nowrap;
+
+    background-color: white;
+    padding: 0.7rem;
+    border-radius: 4rem;
+    font-size: 1.5rem;
+    margin-left: 0.3rem;
+ }
+ input {
+    all: unset;
+
+
+    background-color: white;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    font-size: 1.5rem;
+    margin-left: 0.3rem;
+ }
+
+ span {
+    color: black;
+    font-size: 1.5rem;
+ }
+
+ #expenses-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    background-color: #fef7e6;
+    width: 100vw;
+    box-sizing: border-box;
+    flex-wrap: nowrap;
+    padding-left:4rem;
+    padding-right: 4rem;
+
+    font-size: 2.5rem;
+ }
+#expenses-container > div {
+    text-wrap: nowrap;
+}
+
+#add-expense {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+
+ @media (max-width: 480px) {
+    .header {
+        padding: 10px;
+        flex-wrap: wrap;
+        justify-content: center;
+        flex-direction: column;
+        min-width: 2rem;
+    }
+    .header > p {
+        font-size: 0.8rem;
+    }
+    h1 {
+        font-size: 1.5rem;
+    }
+    .anchors > a {
+        font-size: 1rem;
+        padding: 0.7rem;
+    }
+    #expenses-container {
+        padding-left:0.5rem;
+        padding-right: 0.5rem;
+    }
+
+
+    #expenses-container > div > * {
+        font-size: 0.9rem;
+    }
+
+    input {
+        background-color: white;
+        padding: 0.2rem;
+        border-radius: 0.3rem;
+        font-size: 0.9rem;
+        width: 6rem;
+    }
+
+    button {
+        text-align: center;
+        white-space: nowrap;
+
+        background-color: white;
+        padding: 0.1rem;
+        border-radius: 4rem;
+        font-size: 0.9rem;
+        margin-left: 0.1rem;
+ }
  }
