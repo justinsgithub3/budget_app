@@ -2,16 +2,22 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="/styles/login.css"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
 <body>
-    <p>Login page</p>
-    <a id="home-anchor" href="/">home</a>
+    <header class="header">
+        <h1>Login page</h1>
+        <div class="anchors">
+            <a id="home-anchor" href="/">home</a>
+        </div>
+    </header>
     <!-- enter username and password as a form to /verify/login -->
     <form id="login-form" action="/verify/login" method="POST">
         <label for="username">Username:</label>
         <input type="text" id="username" name="username" />
+        
         <label for="password">Password:</label>
         <input type="text" id="password" name="password" />
         

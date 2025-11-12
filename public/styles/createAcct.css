@@ -1,0 +1,135 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+html {
+    font-size: 16px;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+    text-align: center;
+    white-space: nowrap;
+}
+
+
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    background-color: #FFD372;
+    margin: 0px;
+}
+
+.header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #FFD372;
+    width: 100vw;
+    box-sizing: border-box;
+    padding: 4rem;
+    flex-wrap: nowrap;
+ }
+
+  h1 {
+    color: white;
+    font-size: 4rem;
+ }
+
+ .anchors {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    padding: 0px;
+ }
+ .anchors > a {
+    background-color: white;
+    padding: 1rem;
+    border-radius: 4rem;
+    font-size: 1.5rem;
+    margin-left: 0.3rem;
+ }
+
+ button {
+    background-color: #F15B42;
+    padding: 1rem;
+    border-radius: 4rem;
+    font-size: 1.5rem;
+    margin-left: 0.3rem;
+    color: white;
+
+    box-shadow: 0px 4px 0px #2C3D73;
+ }
+
+  #create-account-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #FFD372;
+    width: 100vw;
+    box-sizing: border-box;
+    padding: .5rem;
+    flex-wrap: nowrap;
+
+    height: 100vh;
+
+    font-size: 1.5rem;
+}
+
+ input {
+    all: unset;
+
+    background-color: white;
+    padding: 0.8rem;
+    border-radius: 0.5rem;
+    font-size: 1.5rem;
+    margin-left: 0.3rem;
+ }
+
+ span {
+    color: black;
+    font-size: 1.5rem;
+ }
+
+
+ @media (max-width: 480px) {
+    .header {
+        padding: 1rem;
+        min-width: 2rem;
+    }
+    .header > p {
+        font-size: 0.8rem;
+    }
+    h1 {
+        font-size: 1.6rem;
+    }
+    .anchors > a {
+        font-size: 1rem;
+        padding: 0.7rem;
+    }
+
+    input {
+        background-color: white;
+        padding: 0.2rem;
+        border-radius: 0.3rem;
+        font-size: 0.9rem;
+        width: 6rem;
+    }
+
+    button {
+        text-align: center;
+        white-space: nowrap;
+
+
+        padding: 0.5rem;
+        border-radius: 4rem;
+        font-size: 1rem;
+ }
+ }
