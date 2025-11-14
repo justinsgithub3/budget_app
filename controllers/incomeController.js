@@ -1,13 +1,13 @@
 import path from 'path';
 import { fileURLToPath } from 'url'; 
-import { getExpenses, putExpense, addExpense, deleteExpense, getSumOfExpenses } from '../database/expenseQueries.js';
+import { getIncomes, putIncome, addIncome, deleteIncome, getSumOfIncomes } from '../database/incomeQueries.js';
 
 // Get the current filename and directory path
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// gets all expenses for a certain user
-export const getUserExpenses = async (req, res, next) => {  
+// gets all incomes for a certain user
+export const getUserIncomes = async (req, res, next) => {  
     // if user not logged in, redirect back home 
     if (!req.session.userId) {
         return res.json({err: "user not logged in."});
@@ -15,12 +15,12 @@ export const getUserExpenses = async (req, res, next) => {
     try {
         const userId = req.session.userId;
         // get user id
-        const expenses = await getExpenses(userId);
+        const incomes = await getIncomes(userId);
     
         res.json(
             {
                 "status" : "success",
-                "expenses": expenses
+                "incomes": incomes
             }
         );
     }
@@ -31,8 +31,8 @@ export const getUserExpenses = async (req, res, next) => {
     }
 };
 
-// update one expense
-export const putUserExpense = async (req, res, next) => {
+// update one income
+export const putUserIncome = async (req, res, next) => {
     try {  
         const user = req.session.userId;
         if (!user) {
@@ -40,7 +40,7 @@ export const putUserExpense = async (req, res, next) => {
         } 
         const data = req.body;
         
-        const response = await putExpense(data); // pass expense info and data to query
+        const response = await putIncome(data); // pass income info and data to query
 
         res.json({"status" : "success"});
     } catch (e) {
@@ -50,7 +50,8 @@ export const putUserExpense = async (req, res, next) => {
     }
 }
 
-export const addUserExpense = async (req, res, next) => {
+
+export const addUserIncome = async (req, res, next) => {
     const user = req.session.userId;
     if (!user) {
         return res.json({err: "user not logged in."});
@@ -58,7 +59,7 @@ export const addUserExpense = async (req, res, next) => {
     try {
 
         const data = req.body;
-        const response = await addExpense(data, user);
+        const response = await addIncome(data, user);
 
         res.json({"status" : "success"});
 
@@ -69,14 +70,14 @@ export const addUserExpense = async (req, res, next) => {
     }
 }
 
-export const deleteUserExpense = async (req, res, next) => {
+export const deleteUserIncome = async (req, res, next) => {
     const user = req.session.userId;
     if (!user) {
         return res.json({err: "user not logged in."});
     } 
     try {
         const data = req.body;
-        const response = await deleteExpense(data, user);
+        const response = await deleteIncome(data, user);
         res.json({"status" : "success"});
 
     } catch (e) {
@@ -86,13 +87,13 @@ export const deleteUserExpense = async (req, res, next) => {
     }
 }
 
-export const getSumUserExpenses = async (req, res, next) => {
+export const getSumUserIncomes = async (req, res, next) => {
     const user = req.session.userId;
     if (!user) {
         return res.json({err: "user not logged in."});
     } 
     try {
-        const response = await getSumOfExpenses(user);
+        const response = await getSumOfIncomes(user);
         const total = response.total;
 
         res.json(

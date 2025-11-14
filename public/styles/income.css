@@ -82,7 +82,7 @@ h1 {
 /* -----------------------------------------------------------
    EXPENSES CONTAINER
 ----------------------------------------------------------- */
-#expenses-container {
+#incomes-container {
   display: flex;
   flex-direction: column;
   align-items: stretch;
@@ -100,7 +100,7 @@ h1 {
 /* -----------------------------------------------------------
    INDIVIDUAL EXPENSE ROW
 ----------------------------------------------------------- */
-#expenses-container > div {
+#incomes-container > div {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -119,24 +119,24 @@ h1 {
 
 
 /* Text elements (description, amount, date) */
-#expenses-container > div span {
+#incomes-container > div span {
   font-size: 2rem;
   color: #2C3D73;
   white-space: normal;
   text-align: left;
 }
 
-#expenses-container > div span:nth-child(1) {
+#incomes-container > div span:nth-child(1) {
   font-weight: 500;
   width: 10rem;
 }
 
-#expenses-container > div span:nth-child(2) {
+#incomes-container > div span:nth-child(2) {
   min-width: 6rem;
   text-align: right;
 }
 
-#expenses-container > div span:nth-child(3) {
+#incomes-container > div span:nth-child(3) {
   color: #2C3D73;
   font-size: 2rem;
 }
@@ -155,7 +155,7 @@ button {
 }
 
 /* Add new button */
-#add-expense {
+#add-income {
   margin-top: 1.5rem;
   background-color: white;
   box-shadow: 0px 4px 0px #2C3D73;
@@ -163,7 +163,7 @@ button {
   font-weight: 600;
   padding: 0.8rem 1.5rem;
 }
-#add-expense:hover {
+#add-income:hover {
   color: white;
   background-color: #F15B42;
   transform: translateY(-2px);
@@ -211,7 +211,7 @@ button {
 /* Cancel button */
 .cancel-button {
   background-color: #fff;
-  border: 1px solid #ccc;#ffcf59;
+  border: 1px solid #ffcf59;
   color: #2C3D73;
 }
 .cancel-button:hover {
@@ -221,7 +221,7 @@ button {
 /* -----------------------------------------------------------
    ADDING NEW EXPENSE (INLINE FORM)
 ----------------------------------------------------------- */
-.adding-new-expense {
+.adding-new-income {
   display: flex;
   flex-wrap: wrap;
   align-items: flex-start;
@@ -243,7 +243,7 @@ button {
     font-weight: 500;
 }
 
-.adding-new-expense span {
+.adding-new-income span {
   all: unset;
   padding: 0.6rem 1rem;
   font-size: 1.1rem;
@@ -251,7 +251,7 @@ button {
 }
 
 
-.adding-new-expense input {
+.adding-new-income input {
   all: unset;
   background-color: #fef7e6;
   border: 1px solid #ddd;
@@ -260,7 +260,7 @@ button {
   font-size: 1.1rem;
   width: 80%;
 }
-.adding-new-expense input:focus {
+.adding-new-income input:focus {
   outline: none;
   border-color: #ffd372;
   background-color: #fff8e8;
@@ -289,14 +289,14 @@ button {
 ----------------------------------------------------------- */
 @media (max-width: 480px) {
 
-  /* Expense container adjustments */
-  #expenses-container {
+  /* Income container adjustments */
+  #incomes-container {
     width: 95%;
     padding: 1rem;
   }
 
-  /* Individual expense row */
-  #expenses-container > div {
+  /* Individual income row */
+  #incomes-container > div {
     flex-direction: column; /* stack content vertically */
     align-items: stretch;
     padding: 0.8rem;
@@ -304,50 +304,50 @@ button {
   }
 
   /* Top row: spans (description, amount, date) */
-  #expenses-container > div .spans-row,
-  #expenses-container > div span {
+  #incomes-container > div .spans-row,
+  #incomes-container > div span {
     display: flex;
     justify-content: flex-start;
     gap: 1rem; /* spacing between spans */
     flex-wrap: wrap; /* wrap if needed */
   }
 
-  #expenses-container > div span {
+  #incomes-container > div span {
     font-size: 1rem;
     color: #2C3D73;
   }
 
-  #expenses-container > div span:nth-child(3) {
+  #incomes-container > div span:nth-child(3) {
   color: #2C3D73;
   font-size: 1rem;
 }
 
   /* Bottom row: buttons */
-  #expenses-container > div .buttons-row {
+  #incomes-container > div .buttons-row {
     display: flex;
     justify-content: flex-end; /* right-aligned */
     gap: 0.5rem;
   }
 
-  #expenses-container > div button {
+  #incomes-container > div button {
     font-size: 0.9rem;
     padding: 0.4rem 0.8rem;
     margin-top: 0;
   }
 
-  /* Adding new expense form */
-  .adding-new-expense {
+  /* Adding new income form */
+  .adding-new-income {
     flex-direction: column;
     align-items: stretch;
     gap: 0.6rem;
     padding: 1rem;
   }
 
-  .adding-new-expense input {
+  .adding-new-income input {
     width: 90%;
   }
 
-  .adding-new-expense button {
+  .adding-new-income button {
     align-self: flex-end;
   }
 

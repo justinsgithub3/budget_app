@@ -65,3 +65,35 @@ export const getLevel2 = async (req, res, next) => {
         res.status(500).json({ error : e.message || 'Internal server error' });
     }
 };
+
+export const getIncomePage = async (req, res, next) => {    
+    // authenticate user
+    if (!req.session.userId) {
+        return res.redirect('/display/login');
+    }
+    try {
+        res.status(200).sendFile(path.join(__dirname, '..', 'public', 'views', 'income.html'));
+    }
+    catch (e) {
+        // server error
+        console.log("Error: ", e)
+        res.status(500).json({ error : e.message || 'Internal server error' });
+    }
+};
+
+export const getOverview = async (req, res, next) => {    
+    // authenticate user
+    if (!req.session.userId) {
+        return res.redirect('/display/login');
+    }
+    try {
+        res.status(200).sendFile(path.join(__dirname, '..', 'public', 'views', 'overview.html'));
+    }
+    catch (e) {
+        // server error
+        console.log("Error: ", e)
+        res.status(500).json({ error : e.message || 'Internal server error' });
+    }
+};
+
+

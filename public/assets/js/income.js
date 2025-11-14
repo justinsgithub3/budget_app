@@ -1,46 +1,47 @@
-let expensesCont = document.querySelector('#expenses-container');
-let addExpenseButton = document.querySelector('#add-expense');
+let incomesCont = document.querySelector('#incomes-container');
+let addIncomeButton = document.querySelector('#add-income');
 
 const logoutAnch = document.querySelector("#logout-anchor");
 
 
-// returns an object of expenses
-async function expenses() {
-    const res = await fetch('/exp');
+// returns an object of incomes
+async function incomes() {
+    const res = await fetch('/inc');
     const data = await res.json();
-    const expenses = data.expenses;
-    return expenses;
+    const incomes = data.incomes;
+    console.log(incomes)
+    return incomes;
 }
 
-async function sumOfExpenses() {
-    const res = await fetch('/exp/total');
+async function sumOfIncomes() {
+    const res = await fetch('/inc/total');
     const data = await res.json();
     const total = data.total;
     return total
 }
 
-async function displayExpenses(expenses) {
+async function displayIncomes(incomes) {
     // clear any pre-existing data
-    expensesCont.innerHTML = '';
+    incomesCont.innerHTML = '';
 
-    expenses.forEach(e => {
-        const id = e.expense_id;
-        const description = e.description_exp;
+    incomes.forEach(e => {
+        const id = e.income_id;
+        const description = e.description_inc;
         const amount = e.amount;
-        const date = e.date_exp;
+        const date = e.date_inc;
 
-        const expenseEl = document.createElement('div');
-        expenseEl.setAttribute("id", id);
-        expensesCont.appendChild(expenseEl);
+        const incomeEl = document.createElement('div');
+        incomeEl.setAttribute("id", id);
+        incomesCont.appendChild(incomeEl);
         
         // description
         const descriptionSpan = document.createElement('span');
         descriptionSpan.innerText = description;
-        expenseEl.appendChild(descriptionSpan);
+        incomeEl.appendChild(descriptionSpan);
         // amount
         const amountSpan = document.createElement('span');
         amountSpan.innerText = amount;
-        expenseEl.appendChild(amountSpan);
+        incomeEl.appendChild(amountSpan);
         // date
 
         /* 
@@ -57,21 +58,21 @@ async function displayExpenses(expenses) {
         const dateSpan = document.createElement('span');
         console.log(date)
         dateSpan.innerText = date.split("T")[0];
-        expenseEl.appendChild(dateSpan);
+        incomeEl.appendChild(dateSpan);
 
         // create delete button
         const deleteEl = document.createElement('button');
         deleteEl.textContent = 'x';
         deleteEl.classList.add('delete');
         deleteEl.addEventListener('click', deletePost); // event listener attached to every delete button
-        expenseEl.appendChild(deleteEl);
+        incomeEl.appendChild(deleteEl);
 
         // create edit button
         const editEl = document.createElement('button');
         editEl.textContent = 'edit';
         editEl.classList.add('edit')
         editEl.addEventListener('click', editPost); // event listener attached to every edit button
-        expenseEl.appendChild(editEl);
+        incomeEl.appendChild(editEl);
     })
 }
 
@@ -81,7 +82,7 @@ async function deletePost(e) {
     console.log(id)
 
     try {
-        const res = await fetch('/exp', {
+        const res = await fetch('/inc', {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json'
@@ -104,11 +105,11 @@ async function deletePost(e) {
     }
     // redisplay everything
     // display of totals
-    const totalExp = await sumOfExpenses();
-    await updateTotal(totalExp);
+    const totalInc = await sumOfIncomes();
+    await updateTotal(totalInc);
     
-    const expensesToDisplay = await expenses();
-    await displayExpenses(expensesToDisplay);
+    const incomesToDisplay = await incomes();
+    await displayIncomes(incomesToDisplay);
 
 }
 
@@ -231,7 +232,7 @@ async function saveEdit(e) {
 
     console.log(newDescription, newAmount, newDate)
     try {
-        const res = await fetch('/exp', {
+        const res = await fetch('/inc', {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
@@ -258,21 +259,21 @@ async function saveEdit(e) {
     // redisplay everything
 
     // display of totals
-    const totalExp = await sumOfExpenses();
-    await updateTotal(totalExp);
+    const totalInc = await sumOfIncomes();
+    await updateTotal(totalInc);
 
-    const expensesToDisplay = await expenses();
-    await displayExpenses(expensesToDisplay);
+    const incomesToDisplay = await incomes();
+    await displayIncomes(incomesToDisplay);
 }
 
-async function addExpenseDisplay(e) {
-    // only allows for one expense to be created at a time
-    const checkForNew = document.querySelectorAll(".adding-new-expense");
+async function addIncomeDisplay(e) {
+    // only allows for one income to be created at a time
+    const checkForNew = document.querySelectorAll(".adding-new-income");
     if (checkForNew.length >= 1 ) {
         console.log('already creating a new one...')
     } else {
         const newDiv = document.createElement("div");
-        newDiv.classList.add('adding-new-expense')
+        newDiv.classList.add('adding-new-income')
         const descriptionSpan = document.createElement("span");
         const descriptionInput = document.createElement("input");
         descriptionInput.id = 'new-description';
@@ -290,7 +291,7 @@ async function addExpenseDisplay(e) {
         dateInput.value = today;
         dateInput.id = 'new-date';
 
-        expensesCont.appendChild(newDiv);
+        incomesCont.appendChild(newDiv);
 
         newDiv.appendChild(descriptionSpan);
         newDiv.appendChild(descriptionInput);
@@ -313,21 +314,21 @@ async function addExpenseDisplay(e) {
         newDiv.appendChild(cancelButton);
         newDiv.appendChild(saveButton);
 
-        cancelButton.addEventListener('click', cancelNewExpense);
-        saveButton.addEventListener('click', saveNewExpense);
+        cancelButton.addEventListener('click', cancelNewIncome);
+        saveButton.addEventListener('click', saveNewIncome);
     }
 }
 
-async function cancelNewExpense(e) {
+async function cancelNewIncome(e) {
     console.log('cancelling...');
-    const newExpenseDivs = document.querySelectorAll(".adding-new-expense");
+    const newIncomeDivs = document.querySelectorAll(".adding-new-income");
     
-    newExpenseDivs.forEach(div => {
+    newIncomeDivs.forEach(div => {
         div.remove();
     })
 }
 
-async function saveNewExpense(e) {
+async function saveNewIncome(e) {
     // get data from existing div
     const newDescription = document.querySelector("#new-description").value;
     const newAmount = document.querySelector("#new-amount").value;
@@ -337,7 +338,7 @@ async function saveNewExpense(e) {
     newDate += `T01:00:00.000Z`;
     console.log(newDate)
     try {
-        const res = await fetch('/exp', {
+        const res = await fetch('/inc', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -354,17 +355,17 @@ async function saveNewExpense(e) {
             throw new Error('Failed to add post')
         }
     } catch (e) {
-        console.log('error adding new expense')
+        console.log('error adding new income')
     }
 
 
     // redisplay everything
     // display of totals
-    const totalExp = await sumOfExpenses();
-    await updateTotal(totalExp);
+    const totalInc = await sumOfIncomes();
+    await updateTotal(totalInc);
 
-    const expensesToDisplay = await expenses();
-    await displayExpenses(expensesToDisplay);
+    const incomesToDisplay = await incomes();
+    await displayIncomes(incomesToDisplay);
 }
 
 async function updateTotal(total) {
@@ -397,7 +398,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     header.insertBefore(nameEle, list[list.length-1]);
 
     // add event listener to 'add new' button
-    addExpenseButton.addEventListener('click', addExpenseDisplay);
+    addIncomeButton.addEventListener('click', addIncomeDisplay);
 
     // handle logout
     logoutAnch.addEventListener("click", async (e) => {
@@ -405,11 +406,11 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
 
     // display of totals
-    const totalExp = await sumOfExpenses();
-    await updateTotal(totalExp);
+    const totalInc = await sumOfIncomes();
+    await updateTotal(totalInc);
 
     // display of all other items
-    const expensesToDisplay = await expenses();
-    await displayExpenses(expensesToDisplay);
+    const incomesToDisplay = await incomes();
+    await displayIncomes(incomesToDisplay);
 })
 

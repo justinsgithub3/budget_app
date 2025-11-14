@@ -2,7 +2,7 @@ import path from 'path';
 import { fileURLToPath } from 'url'; 
 import { pool } from '../database/pool.js';
 import bcrypt from 'bcrypt';
-import { getUserData } from '../database/queries.js';
+import { getUserData } from '../database/authenticationQueries.js';
 // Get the current filename and directory path
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);

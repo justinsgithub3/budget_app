@@ -9,6 +9,7 @@ import authentication from './routes/authentication.js';
 import display from './routes/display.js';
 import session from 'express-session';
 import expense from './routes/expense.js';
+import income from './routes/income.js';
 
 // Get the current filename and directory path
 const __filename = fileURLToPath(import.meta.url);
@@ -53,7 +54,8 @@ app.use(express.json());
 //app.use('/level', level);
 app.use('/verify', authentication);
 app.use('/display', display); // reitterating levels for testing
-app.use('/exp', expense) // anything dealing with expenses
+app.use('/exp', expense); // anything dealing with expenses
+app.use('/inc', income); // anything dealing with income
 
 app.get(['/'], (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'views/index.html'));
