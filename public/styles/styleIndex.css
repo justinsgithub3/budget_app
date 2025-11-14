@@ -37,6 +37,13 @@ body {
     flex-wrap: nowrap;
  }
 
+ .left-header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+ }
+
  h1 {
     color: white;
     font-size: 4rem;
@@ -94,6 +101,12 @@ body {
 
 }
 
+
+#main-container > a:hover {
+    background-color: #ffe9b3;
+    color: #2C3D73;
+}
+
 @media (max-width: 480px) {
     .header {
         padding: 10px;
@@ -118,3 +131,4 @@ body {
         padding: 0.7rem;
     }
 }
+
