@@ -1,6 +1,6 @@
 import path from 'path';
 import { fileURLToPath } from 'url'; 
-import { getProfit, getIncomes, getExpenses } from '../database/overviewQueries.js';
+import { getProfit, getIncomes, getExpenses, getExpenseAvg, getIncomeAvg } from '../database/overviewQueries.js';
 
 // Get the current filename and directory path
 const __filename = fileURLToPath(import.meta.url);
@@ -43,12 +43,16 @@ export const getUserAccounts = async (req, res, next) => {
 
         const incomes = await getIncomes(userId);
         const expenses = await getExpenses(userId);
-        
+        const avgExpenses = await getExpenseAvg(userId);
+        const avgIncomes = await getIncomeAvg(userId);
+
         res.json(
             {
                 "status" : "success",
                 "incomes": incomes,
-                "expenses": expenses
+                "expenses": expenses,
+                "avgExpenses": avgExpenses,
+                "avgIncomes": avgIncomes
             }
         );
     }

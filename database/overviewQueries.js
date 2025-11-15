@@ -22,3 +22,26 @@ export const getIncomes = async (userId) => {
                                             ORDER BY date_inc`, [userId]);
     return incomes;
 };
+
+export const getExpenseAvg = async (userId) => {
+    const [expenseAvg] = await pool.query( `SELECT 
+                                            DATE(date_exp) AS expense_date,
+                                            AVG(amount) AS avg_daily_amount
+                                            FROM expenses
+                                            WHERE user_id = ?
+                                            GROUP BY DATE(date_exp)
+                                            ORDER BY expense_date`, [userId]);
+    return expenseAvg;
+};
+
+export const getIncomeAvg = async (userId) => {
+    const [incomeAvg] = await pool.query(  `SELECT 
+                                            DATE(date_inc) AS income_date,
+                                            AVG(amount) AS avg_daily_amount
+                                            FROM incomes
+                                            WHERE user_id = ?
+                                            GROUP BY DATE(date_inc)
+                                            ORDER BY income_date`, [userId]);
+    return incomeAvg;
+};
+

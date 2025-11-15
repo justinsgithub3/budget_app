@@ -19,11 +19,17 @@ async function getAccounts () {
     const data = await res.json();
     const expenses = data.expenses;
     const incomes = data.incomes;
+    const avgExpenses = data.avgExpenses;
+    const avgIncomes = data.avgIncomes;
     console.log(`------- expenses --------`);
     console.log(expenses);
-
     console.log(`------- incomes --------`);
     console.log(incomes)
+    console.log(`------- income avg --------`);
+    console.log(avgIncomes)
+    console.log(`------- expense avg --------`);
+    console.log(avgExpenses)
+
     return data;
   }
   catch (e) 
