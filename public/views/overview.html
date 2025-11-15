@@ -1,11 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="stylesheet" href="/styles/overview.css"/>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Overview</title>
 </head>
 <body>
-    Overview!
+    <header class="header">
+        <div class="left-header">
+            <h1>overview</h1>
+        </div>
+        <div class="anchors">
+            <a id="home-anchor" href="/">home</a>
+        </div>
+    </header>
+    <canvas
+        id="myChart" style="width:100%;max-width:700px">
+    </canvas>
+
+    <div id="total-div"></div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+
+    <script type="module" src="/assets/js/overview.js"></script>
 </body>
 </html>

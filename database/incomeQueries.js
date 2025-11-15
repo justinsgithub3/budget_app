@@ -1,8 +1,11 @@
 import { pool } from '../database/pool.js';
 
-// gets the sum of all incomes for a user
+
 export const getIncomes = async (userId) => {
-    const [incomes] = await pool.query("SELECT income_id, description_inc, amount, date_inc FROM incomes WHERE user_id = ?", [userId]);
+    const [incomes] = await pool.query(    `SELECT income_id, description_inc, amount, date_inc 
+                                            FROM incomes 
+                                            WHERE user_id = ?
+                                            ORDER BY date_inc`, [userId]);
     return incomes;
 };
 
