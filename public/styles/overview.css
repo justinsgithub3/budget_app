@@ -73,6 +73,16 @@ p {
 }
 
 
-#myChart {
+#myPlotChart {
     background-color: #fef7e6;
+    width: 90%;
+    height: 40%;
+    margin: 10px;
 }
+
+#myLineChart {
+    background-color: #fef7e6;
+    width: 90%;
+    height: 40%;
+}
+
