@@ -77,7 +77,7 @@ body {
  #main-container {
     display: flex;
     flex-direction: row;
-    align-items: flex-start;
+    align-items: center;
     justify-content: space-around;
     background-color: #FFD372;
     width: 100vw;
@@ -85,14 +85,19 @@ body {
     padding: 4rem;
     flex-wrap: wrap;
 
-    height: 100vh;
+   
 
     font-size: 2.5rem;
  }
 
  #main-container > a {
+    display: flex;
+    flex-direction: column; /* stack icon above text */
+    align-items: center;    /* center horizontally */
+    justify-content: center;
+
     background-color: #F15B42;
-    padding: 1rem;
+    padding: 1.5rem;
     border-radius: 4rem;
     font-size: 1.5rem;
     margin-left: 0.3rem;
@@ -100,6 +105,20 @@ body {
 
     box-shadow: 0px 4px 0px #2C3D73;
 
+}
+
+
+.icon {
+    width: 3rem;
+    height: 3rem;
+    fill: white; /* normal state */
+    margin-right: 0.5rem;
+
+    border-radius: 0.5rem; /* change to 50% for circle */
+}
+
+a:hover .icon {
+    fill: #2C3D73;
 }
 
 
@@ -124,8 +143,8 @@ body {
     }
     #main-container > a {
         margin: 0.5rem;
-        font-size: 1rem;
-        padding: 0.7rem;
+        font-size: 1.5rem;
+        padding: 2rem;
     }
     .anchors > a {
         font-size: 1rem;
