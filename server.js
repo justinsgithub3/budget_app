@@ -11,6 +11,7 @@ import session from 'express-session';
 import expense from './routes/expense.js';
 import income from './routes/income.js';
 import overview from './routes/overview.js';
+import settings from './routes/settings.js';
 
 // Get the current filename and directory path
 const __filename = fileURLToPath(import.meta.url);
@@ -54,10 +55,12 @@ app.use(express.json());
 // routes in this middlware regarding levels
 //app.use('/level', level);
 app.use('/verify', authentication);
-app.use('/display', display); // reitterating levels for testing
-app.use('/exp', expense); // anything dealing with expenses
-app.use('/inc', income); // anything dealing with income
-app.use('/ovrv', overview) // anything dealing with overview / summary
+app.use('/display', display);         // reitterating levels for testing
+app.use('/exp', expense);             // anything dealing with expenses
+app.use('/inc', income);              // anything dealing with income
+app.use('/ovrv', overview);           // anything dealing with overview / summary
+app.use('settings', settings)         // anything dealing with settings
+
 
 app.get(['/marketing'], (req, res) => {
     res.redirect('https://bolsoyj1010.wixsite.com/feather');
