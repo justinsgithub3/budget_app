@@ -335,7 +335,7 @@ async function saveNewIncome(e) {
     
 
     let newDate = document.querySelector("#new-date").value;
-    newDate += `T01:00:00.000Z`;
+    newDate += `T00:00:00.000Z`;
     console.log(newDate)
     try {
         const res = await fetch('/inc', {

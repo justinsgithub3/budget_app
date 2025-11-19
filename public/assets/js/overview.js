@@ -1,3 +1,20 @@
+const header = document.querySelector(".header");
+// create element to add current user's name
+const nameEle = document.createElement("p");
+//get name from session storage
+const name = sessionStorage.getItem('name')
+nameEle.textContent = name;
+
+// get list of children
+let list = header.children;
+// append as second to last child in container
+header.insertBefore(nameEle, list[list.length-1]);
+
+const logoutAnch = document.querySelector("#logout-anchor");
+// handle logout
+logoutAnch.addEventListener("click", async (e) => {
+    sessionStorage.clear();
+})
 
 const totalDiv = document.querySelector("#total-div");
 // global so it can go from fetched and into the chart
@@ -22,14 +39,6 @@ async function getAccounts () {
     const incomes = data.incomes;
     const avgExpenses = data.avgExpenses;
     const avgIncomes = data.avgIncomes;
-    console.log(`------- expenses --------`);
-    console.log(expenses);
-    console.log(`------- incomes --------`);
-    console.log(incomes)
-    console.log(`------- income avg --------`);
-    console.log(avgIncomes)
-    console.log(`------- expense avg --------`);
-    console.log(avgExpenses)
 
     return data;
   }

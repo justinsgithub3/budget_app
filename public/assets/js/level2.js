@@ -3,7 +3,6 @@ let addExpenseButton = document.querySelector('#add-expense');
 
 const logoutAnch = document.querySelector("#logout-anchor");
 
-
 // returns an object of expenses
 async function expenses() {
     const res = await fetch('/exp');
@@ -334,7 +333,7 @@ async function saveNewExpense(e) {
     
 
     let newDate = document.querySelector("#new-date").value;
-    newDate += `T01:00:00.000Z`;
+    newDate += `T00:00:00.000Z`;
     console.log(newDate)
     try {
         const res = await fetch('/exp', {
