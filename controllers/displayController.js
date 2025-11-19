@@ -96,4 +96,19 @@ export const getOverview = async (req, res, next) => {
     }
 };
 
-
+export const getSettings = async (req, res, next) => {    
+    // let anyone see the settings page as of now!
+    // authenticate user
+    //if (!req.session.userId) {
+    //    return res.redirect('/display/login');
+    //}
+    
+    try {
+        res.status(200).sendFile(path.join(__dirname, '..', 'public', 'views', 'settings.html'));
+    }
+    catch (e) {
+        // server error
+        console.log("Error: ", e)
+        res.status(500).json({ error : e.message || 'Internal server error' });
+    }
+};

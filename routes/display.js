@@ -1,6 +1,7 @@
 import express from 'express';
 import {    getCreatePage,  getLoginPage,   getLevel1, 
-            getLevel2,      getIncomePage,  getOverview   } from '../controllers/displayController.js';
+            getLevel2,      getIncomePage,  getOverview,
+            getSettings                                   } from '../controllers/displayController.js';
 
 
 const router = express.Router();
@@ -17,6 +18,8 @@ router.get('/level2', getLevel2);
 router.get('/income', getIncomePage);
 // overview page
 router.get('/overview', getOverview);
+// settings page
+router.get('/settings', getSettings);
 
 export default router;
 
