@@ -59,6 +59,10 @@ app.use('/exp', expense); // anything dealing with expenses
 app.use('/inc', income); // anything dealing with income
 app.use('/ovrv', overview) // anything dealing with overview / summary
 
+app.get(['/marketing'], (req, res) => {
+    res.redirect('https://bolsoyj1010.wixsite.com/feather');
+})
+
 app.get(['/'], (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'views/index.html'));
 })
