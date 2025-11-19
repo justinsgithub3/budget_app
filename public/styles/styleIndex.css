@@ -33,6 +33,7 @@ body {
 }
 
 .header {
+    
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -83,12 +84,13 @@ body {
  #main-container {
     display: flex;
     flex-direction: row;
-    align-items: center;
-    justify-content: space-around;
+    align-items: flex-start;
+    justify-content: center;
     background-color: #FFD372;
     width: 100vw;
+    height: 100%;
     box-sizing: border-box;
-    padding: 4rem;
+    padding-right: 0.5rem;
     flex-wrap: wrap;
 
    
@@ -104,12 +106,13 @@ body {
 
     background-color: #F15B42;
     padding: 1.5rem;
-    border-radius: 4rem;
+    border-radius: 3rem;
     font-size: 1.5rem;
     margin-left: 0.3rem;
     color: white;
 
     box-shadow: 0px 4px 0px #2C3D73;
+    z-index: 10;
 
 }
 
@@ -133,6 +136,47 @@ a:hover .icon {
     color: #2C3D73;
 }
 
+#img_1 {
+    position: absolute;
+    top: 10%;
+    left: 2%;
+
+    width: 350px;
+    animation: float 4s ease-in-out infinite;
+    z-index: 1;
+}
+
+#img_2 {
+    position: absolute;
+
+    width: 350px;
+    animation: float 4s ease-in-out infinite;
+    bottom: 5%;
+    right: 3%;
+    z-index: 1;
+}
+
+#footer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    margin: 0;
+    padding: 12px;
+    text-align: center;
+    background: #FFD372;
+    width: 100%;
+    text-align: center;
+}
+#footer > * {
+    font-size: 2rem;
+    
+}
+
+#insta-link {
+    color: #F15B42;
+}
+
 @media (max-width: 480px) {
     .header {
         padding: 10px;
@@ -143,14 +187,15 @@ a:hover .icon {
     }
     #main-container {
         font-size: .5rem;
-        flex-direction: column;
-        justify-content: flex-start;
+        justify-content: center;
         align-items: center;
     }
     #main-container > a {
         margin: 0.5rem;
         font-size: 1.5rem;
-        padding: 2rem;
+        padding: 1rem;
+
+        border-radius: 2rem;
     }
     .anchors > a {
         font-size: 1rem;
@@ -158,3 +203,8 @@ a:hover .icon {
     }
 }
 
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
+}
