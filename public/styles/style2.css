@@ -432,31 +432,23 @@ a:hover .icon {
     padding: 1rem;
   }
 
-
-
-
-
-
-
-
-
-
-
-
     #main-container {
         font-size: .5rem;
-        flex-direction: column;
-        justify-content: flex-start;
+        justify-content: center;
         align-items: center;
     }
     #main-container > a {
         margin: 0.5rem;
-        font-size: 1.5rem;
-        padding: 2rem;
+        font-size: 1rem;
+        padding: 0.5rem;
     }
     .anchors > a {
         font-size: 1rem;
         padding: 0.7rem;
+    }
+    .icon {
+      width: 1rem;
+      height: 1rem;
     }
 }
 
