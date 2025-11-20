@@ -40,7 +40,7 @@ body {
     background-color: #FFD372;
     width: 100vw;
     box-sizing: border-box;
-    padding: 4rem;
+    padding: 2rem;
     flex-wrap: nowrap;
  }
 
@@ -83,12 +83,13 @@ body {
  #main-container {
     display: flex;
     flex-direction: row;
-    align-items: center;
-    justify-content: space-around;
+    align-items: flex-start;
+    justify-content: center;
+    align-content: flex-start;
     background-color: #FFD372;
     width: 100vw;
     box-sizing: border-box;
-    padding: 4rem;
+    margin: 2rem;
     flex-wrap: wrap;
 
    

@@ -296,8 +296,9 @@ button {
 #main-container {
     display: flex;
     flex-direction: row;
-    align-items: center;
-    justify-content: space-around;
+    align-items: flex-start;
+    justify-content: center;
+    align-content: flex-start;
     background-color: #FFD372;
     width: 100vw;
     box-sizing: border-box;

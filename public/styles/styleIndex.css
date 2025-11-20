@@ -26,7 +26,6 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 100vh;
     width: 100vw;
     background-color: #FFD372;
     margin: 0px;
@@ -72,6 +71,7 @@ body {
     padding: 0px;
  }
  .anchors > a {
+    z-index: 2;
     background-color: white;
     padding: 1rem;
     border-radius: 4rem;
@@ -80,7 +80,6 @@ body {
  }
 
  
-
  #main-container {
     display: flex;
     flex-direction: row;
@@ -89,7 +88,7 @@ body {
     justify-content: center;
     background-color: #FFD372;
     width: 100vw;
-    height: 100%;
+    height: 100vh;
     box-sizing: border-box;
     padding-right: 0.5rem;
     flex-wrap: wrap;
@@ -143,17 +142,17 @@ a:hover .icon {
 
     width: 350px;
     animation: float 4s ease-in-out infinite;
-    z-index: 1;
+    z-index: 0;
 }
 
 #img_2 {
     position: absolute;
 
-    width: 350px;
+    width: 450px;
     animation: float 4s ease-in-out infinite;
-    bottom: 5%;
-    right: 3%;
-    z-index: 1;
+    top: 15%;
+    right: -12%;
+    z-index: 0;
 }
 
 #footer {
@@ -164,16 +163,29 @@ a:hover .icon {
     margin: 0;
     padding: 12px;
     text-align: center;
-    background: #FFD372;
+    background: #ffe9b3;
     width: 100%;
+    flex-wrap: wrap;
+    gap: 1rem;
 }
 #footer > * {
     font-size: 2rem;
+    color:#2C3D73;
     
 }
 
 #insta-link {
     color: #F15B42;
+}
+
+
+@media (max-width: 1350px) {
+    #img_1 {
+        top: 20%;
+    }
+    #img_2 {
+        top: 30%;
+    }
 }
 
 @media (max-width: 480px) {
