@@ -105,7 +105,7 @@ async function createLineChart(data) {
             }
           }
         },
-    responsive: false,
+    responsive: true,
     maintainAspectRatio: false,
     scales: 
     {
@@ -122,7 +122,11 @@ async function createLineChart(data) {
           }
         },
       y: 
-        {
+        { 
+          beginAtZero: true,
+          ticks: {
+            stepSize: 20,
+          },
           title: 
           {
             display: true,
@@ -188,7 +192,7 @@ async function createPlotChart(data) {
             }
           }
         },
-    responsive: false,
+    responsive: true,
     maintainAspectRatio: false, 
     scales: 
     {
@@ -206,6 +210,10 @@ async function createPlotChart(data) {
         },
       y: 
         {
+          beginAtZero: true,
+          ticks: {
+            stepSize: 20,
+          },
           title: 
           {
             display: true,
