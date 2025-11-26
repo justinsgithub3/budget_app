@@ -41,10 +41,10 @@ document.addEventListener("DOMContentLoaded", async () => {
   await createLineChart(data);
 
   // populates classes with dates
-  await initialDateFilter();
-
+  //await initialDateFilter();
+  await addWeekClass();
   // makes first query to populate 
-  //await initialQuery();
+  await initialQuery();
 
   // adds event listener to filter
   filterType();
@@ -59,11 +59,36 @@ document.addEventListener("DOMContentLoaded", async () => {
 async function initialQuery(){
   let currentDiv = document.querySelector(".current");
   if (currentDiv.id == 'week') {
+    await addWeekClass();
     await makeWeekQuery();
   }
   if (currentDiv.id == 'month') {
+    await addMonthClass();
     await makeQuery();
   }
+
+}
+
+async function removeWeekClasses() {
+  let currentDiv = document.querySelector(".current");
+  let startClass = [...currentDiv.classList].find(c => c.startsWith("start_"));
+  let start = parseInt(startClass.split("_")[1]);
+  currentDiv.classList.remove(startClass);
+
+  let endClass = [...currentDiv.classList].find(c => c.startsWith("end_"));
+  let end = parseInt(endClass.split("_")[1]);
+  currentDiv.classList.remove(endClass);
+
+}
+async function removeMonthClasses() {
+  let currentDiv = document.querySelector(".current");
+
+  let monthClass = [...currentDiv.classList].find(c => c.startsWith("month_"));
+  currentDiv.classList.remove(monthClass);
+  
+  let yearClass = [...currentDiv.classList].find(c => c.startsWith("year_"));
+  currentDiv.classList.remove(yearClass);
+
 
 }
 
@@ -79,11 +104,16 @@ async function filterType() {
       if (selectDiv.value == 'month') {
         // if new filter is month ---
         currentDiv.id = 'month';
+        // remove classes
+        await removeWeekClasses();
+        await addMonthClass();
         await makeQuery();
       }
       else {
         // if new filter is week ---
         currentDiv.id = 'week';
+        await removeMonthClasses();
+        await addWeekClass();
         await makeWeekQuery();
       }
     })
@@ -195,12 +225,7 @@ async function displayWeek(start, end) {
   currentDiv.textContent = ""; // clear current text
   currentDiv.textContent = displayText;
 
-
-
   // Jan 2 - Jan 9
-
-
-
 }
 
 
@@ -222,7 +247,6 @@ async function makeWeekQuery() {
   let currentDiv = document.querySelector(".current");
   // ensure it is the week filter
   if (currentDiv.id == 'week') {
-    console.log('searching for the week!')
 
     let start = await getOverviewStart();
     let end = await getOverviewEnd();
@@ -372,10 +396,8 @@ async function getNextWeek() {
 }
 
 
-async function initialDateFilter() {
-
+async function addWeekClass() {
   let currentDiv = document.querySelector(".current");
-
   if (currentDiv.id = 'week') {
 
     const dateArray = await getCurrentWeek();
@@ -387,7 +409,10 @@ async function initialDateFilter() {
     currentDiv.classList.add(`end_${end}`);
 
   }
+}
 
+async function addMonthClass() {
+  let currentDiv = document.querySelector(".current");
   // if month is selected
   if (currentDiv.id == 'month') {
     let month = await getCurrentMonth();
@@ -395,8 +420,8 @@ async function initialDateFilter() {
 
     currentDiv.classList.add(`month_${month}`);
     currentDiv.classList.add(`year_${year}`);
-  }
-}   
+  } 
+}
 
 async function getCurrentWeek() {
   const now = new Date();

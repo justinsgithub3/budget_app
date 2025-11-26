@@ -215,6 +215,80 @@ body {
 
 
 
+
+/* --- CONTROLS WRAPPER --- */
+#controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    margin: 2rem 0;
+    font-size: 2rem;
+}
+
+
+/* --- CURRENT TEXT --- */
+#controls .current {
+    color: white;
+    font-size: 3rem;
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+
+/* --- PREV / NEXT BUTTONS --- */
+#previous, 
+#next {
+    background-color: #F15B42;
+    color: white;
+    font-size: 2rem;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: 2rem;
+    box-shadow: 0px 4px 0px #2C3D73;
+    cursor: pointer;
+}
+
+#previous:hover,
+#next:hover {
+    background-color: #ffe9b3;
+    color: #2C3D73;
+}
+
+
+/* --- FILTER DROPDOWN (Week / Month) --- */
+#filter {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+
+    font-size: 1.5rem;
+    padding: 0.8rem 3rem 0.8rem 1rem; /* extra right padding for big arrow */
+    border-radius: 2rem;
+    border: none;
+    background-color: white;
+    color: black;
+    box-shadow: 0px 4px 0px #2C3D73;
+    cursor: pointer;
+
+    background-image: url("data:image/svg+xml;utf8,<svg fill='black' height='24' width='24' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
+    background-repeat: no-repeat;
+    background-size: 1.5rem; /* size of arrow */
+    background-position: right 1rem center; /* position of arrow */
+}
+
+#filter:focus {
+    outline: none;
+}
+
+
+
+
+
+
+
+
+
 @media (max-width: 480px) {
     .header {
         padding: 10px;
@@ -293,6 +367,29 @@ body {
         height: 100%; 
     }
 
+
+
+    #controls {
+        gap: 0.7rem;
+        font-size: 1.2rem;
+    }
+
+    #controls .current {
+        font-size: 1.4rem;
+    }
+
+    #previous, 
+    #next {
+        font-size: 1.2rem;
+        padding: 0.4rem 0.8rem;
+    }
+
+    #filter {
+        font-size: 1.2rem;
+        padding: 0.6rem 2.2rem 0.6rem 0.8rem;
+        background-size: 1.2rem;
+        background-position: right 0.7rem center;
+    }
 
 }
 

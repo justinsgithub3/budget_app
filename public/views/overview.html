@@ -12,7 +12,7 @@
             <img type="image/png" src="/assets/bird.png" style="width:100px;height:100px;"/>
             <h1>feather</h1>
         </div>
-        <h1>incomes</h1>
+        <h1>overview</h1>
         <div class="anchors">
         <a id="home-anchor" href="/">home</a>
         <a id="logout-anchor" href="/verify/logout">logout</a>
@@ -35,13 +35,18 @@
             incomes
         </a>
     </div>
-<select name="filter" id="filter">
-    <option value="week">Week</option>
-    <option value="month">Month</option>
-</select>
-<button id="previous">&lt</button>
-<p class="current" id="week">this week!</p>
-<button id="next">&gt</button>
+
+    <div id="controls">
+        <select name="filter" id="filter">
+            <option value="week">Week</option>
+            <option value="month">Month</option>
+        </select>
+
+        <button id="previous">&lt</button>
+        <p class="current" id="week">this week!</p>
+        <button id="next">&gt</button>
+    </div>
+    
     <div id="chart-filtered-wrapper">
         <canvas
             id="chart-filtered">
