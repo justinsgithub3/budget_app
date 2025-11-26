@@ -1,6 +1,8 @@
 import path from 'path';
 import { fileURLToPath } from 'url'; 
-import { getProfit, getIncomes, getExpenses, getExpenseAvg, getIncomeAvg } from '../database/overviewQueries.js';
+import { getProfit, getIncomes, getExpenses, 
+         getExpenseAvg, getIncomeAvg, getMonthExp,
+         getWeekExp                                  } from '../database/overviewQueries.js';
 
 // Get the current filename and directory path
 const __filename = fileURLToPath(import.meta.url);
@@ -53,6 +55,79 @@ export const getUserAccounts = async (req, res, next) => {
                 "expenses": expenses,
                 "avgExpenses": avgExpenses,
                 "avgIncomes": avgIncomes
+            }
+        );
+    }
+    catch (e) {
+        // server error
+        console.log("Error: ", e)
+        res.status(500).json({"status": "no success"});
+    }
+};
+
+
+// gets all expenses for the selected month
+export const getUserMonthExpenses = async (req, res, next) => {  
+
+    const month = req.query.month;
+    const year = req.query.year;
+
+
+    // if user not logged in, redirect back home 
+    const userId = req.session.userId;
+    if (!userId) {
+        return res.json({err: "user not logged in."});
+    } 
+    try {
+
+    if (!month || !year) {
+        return res.json({err: "invalid dates."});
+    }
+
+        const [monthExp] = await getMonthExp(userId, month, year);
+
+        console.log(monthExp)
+        res.json(
+            {
+                "status" : "success",
+                "month_expenses": monthExp
+            }
+        );
+    }
+    catch (e) {
+        // server error
+        console.log("Error: ", e)
+        res.status(500).json({"status": "no success"});
+    }
+};
+
+// gets all expenses for the selected month
+export const getUserWeekExpenses = async (req, res, next) => {  
+
+    // or just get start date and add 7
+
+    const start = req.query.start;
+    const end = req.query.end;
+
+
+    // if user not logged in, redirect back home 
+    const userId = req.session.userId;
+    if (!userId) {
+        return res.json({err: "user not logged in."});
+    } 
+    try {
+
+    if (!start || !end) {
+        return res.json({err: "invalid dates."});
+    }
+
+        const [weekExp] = await getWeekExp(userId, start, end);
+
+        console.log(weekExp)
+        res.json(
+            {
+                "status" : "success",
+                "week_expenses": weekExp
             }
         );
     }

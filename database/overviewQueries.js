@@ -45,3 +45,16 @@ export const getIncomeAvg = async (userId) => {
     return incomeAvg;
 };
 
+export const getMonthExp = async (userId, month, year) => {
+    const [monthExp] = await pool.query(`CALL getMonthExp(?, ?, ?)`
+                                        , [userId, month, year]);
+    return monthExp;
+};
+
+export const getWeekExp = async (userId, startDate, endDate) => {
+    const [weekExp] = await pool.query(`CALL getWeekExp(?, ?, ?)`
+                                        , [userId, startDate, endDate]);
+    // startDate and endDate define the boundaries of which expenses are selected
+    console.log(weekExp)
+    return weekExp;
+}
