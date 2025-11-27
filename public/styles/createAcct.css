@@ -43,7 +43,7 @@ body {
 
  #logos {
     display: flex;
-        flex-direction: row;
+    flex-direction: row;
     align-items: center;
     justify-content: space-between;
     flex-wrap: nowrap;
@@ -145,5 +145,5 @@ body {
         padding: 0.5rem;
         border-radius: 4rem;
         font-size: 1rem;
- }
+    }
  }
