@@ -41,6 +41,19 @@ body {
     font-size: 4rem;
  }
 
+ #logos {
+    display: flex;
+        flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    padding: 0px;
+ }
+#logo-feather {
+    height: 5rem;
+}
+
+
  .anchors {
     display: flex;
     flex-direction: row;
@@ -103,6 +116,7 @@ body {
     .header {
         padding: 1rem;
         min-width: 2rem;
+        flex-wrap: wrap;
     }
     .header > p {
         font-size: 0.8rem;
